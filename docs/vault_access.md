@@ -1,2 +1,1 @@
-## Vault Access & Logging
-...
+# Vault Access & Logging
