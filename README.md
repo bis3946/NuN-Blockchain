@@ -1,3 +1,12 @@
-# NuN-Blockchain
+# NuN Blockchain Explorer + Staking UI (Integrated)
 
-Complete deployment package.
+Run `staking.py`, then open:
+http://localhost:5000
+
+The explorer UI will now work with Flask API endpoints for:
+- balance
+- stake
+- unstake
+- claim
+
+Frontend is served directly from the Flask backend.

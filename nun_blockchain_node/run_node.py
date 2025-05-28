@@ -44,9 +44,6 @@ def explorer():
         "blocks": blockchain,
         "mempool": mempool
     })
-@app.route('/')
-def home():
-    return "<h2>NuN Blockchain Node is Running</h2><p>Try <a href='/status'>/status</a> or <a href='/explorer'>/explorer</a></p>"
 
 if __name__ == '__main__':
     print("🔗 NuN Blockchain Node running at http://127.0.0.1:5000")
