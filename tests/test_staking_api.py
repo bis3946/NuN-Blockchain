@@ -66,3 +66,12 @@ def test_claiming_twice_does_not_duplicate_rewards(client):
     assert second.status_code == 200
     assert second.get_json()["claimed"] == 0
     assert second.get_json()["nun_tokens"] == 1005
+
+def test_invalid_stake_does_not_change_wallet(client):
+    before = client.get("/balance/test-wallet").get_json()
+    response = client.post("/stake", json={"wallet": "test-wallet", "amount": -10})
+    after = client.get("/balance/test-wallet").get_json()
+    assert response.status_code == 400
+    assert after["nun_tokens"] == before["nun_tokens"]
+    assert after["staked"] == before["staked"]
+    assert after["rewards"] == before["rewards"]
