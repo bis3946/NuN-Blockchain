@@ -57,3 +57,12 @@ def test_claim_clears_rewards(client):
 def test_non_json_body_rejected(client):
     response = client.post("/stake", data="not-json", content_type="text/plain")
     assert response.status_code == 400
+
+def test_claiming_twice_does_not_duplicate_rewards(client):
+    first = client.post("/claim", json={"wallet": "test-wallet"})
+    second = client.post("/claim", json={"wallet": "test-wallet"})
+    assert first.status_code == 200
+    assert first.get_json()["claimed"] == 5
+    assert second.status_code == 200
+    assert second.get_json()["claimed"] == 0
+    assert second.get_json()["nun_tokens"] == 1005
